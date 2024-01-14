@@ -116,7 +116,7 @@ export default function Home() {
         <p className="text-2xl">Projects</p>
         <p className="text-slate-300 mt-3">Some of the projects are from work and some are on my own time.</p>
         <div className="w-full h-px bg-zinc-800 mt-5" />
-          <Carousel className="">
+          <Carousel className="mt-10">
             <CarouselContent>
               {projects.map((project, i) =>
                 <CarouselItem className="md:basis-1/3" key={i}>
