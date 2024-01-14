@@ -110,13 +110,13 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <p className="text-slate-300 text-center text-sm mt-5">Currently, I am working on improving my web development skills and getting my hands dirty on <Link href={"https://www.rust-lang.org/learn"} target="_blank" className="underline">rust</Link>.</p>
+        <p className="text-slate-300 text-center text-sm mt-5">Currently, I am focusing on improving my web development skills and getting my hands dirty on <Link href={"https://www.rust-lang.org/learn"} target="_blank" className="underline">rust</Link>.</p>
       </div>
       <div className="mt-10">
         <p className="text-2xl">Projects</p>
         <p className="text-slate-300 mt-3">Some of the projects are from work and some are on my own time.</p>
         <div className="w-full h-px bg-zinc-800 mt-5" />
-          <Carousel className="mt-10">
+          <Carousel className="mt-10 w-100">
             <CarouselContent>
               {projects.map((project, i) =>
                 <CarouselItem className="md:basis-1/3" key={i}>
