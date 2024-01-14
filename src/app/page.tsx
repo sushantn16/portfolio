@@ -103,7 +103,7 @@ export default function Home() {
                 href={s.href}
                 target="_blank"
                 className="duration-700 group">
-                <span className="relative z-10 flex items-center justify-center w-12 h-12 text-sm duration-1000 border rounded-full text-zinc-200 group-hover:text-white group-hover:bg-zinc-900 border-zinc-500 bg-zinc-900 group-hover:border-zinc-200 drop-shadow-orange">
+                <span className="relative z-100 flex items-center justify-center w-12 h-12 text-sm duration-1000 border rounded-full text-zinc-200 group-hover:text-white group-hover:bg-zinc-900 border-zinc-500 bg-zinc-900 group-hover:border-zinc-200 drop-shadow-orange">
                   {s.icon}
                 </span>
               </Link>
@@ -116,11 +116,10 @@ export default function Home() {
         <p className="text-2xl">Projects</p>
         <p className="text-slate-300 mt-3">Some of the projects are from work and some are on my own time.</p>
         <div className="w-full h-px bg-zinc-800 mt-5" />
-        <div className="gap-5 flex flex-row flex-wrap mt-10 text-justify">
-          <Carousel>
-            <CarouselContent className="">
+          <Carousel className="">
+            <CarouselContent>
               {projects.map((project, i) =>
-                <CarouselItem className="basis-1/3" key={i}>
+                <CarouselItem className="md:basis-1/3" key={i}>
                   <Link href={project.href} className="duration-700 group" target="_blank">
                     <Card className="bg-black h-80 border-zinc-500 group-hover:border-zinc-200 duration-1000 text-zinc-200 group-hover:text-white">
                       <CardHeader className="text-xl">
@@ -136,7 +135,6 @@ export default function Home() {
             <CarouselPrevious className="bg-black border-0" />
             <CarouselNext className="bg-black border-0" />
           </Carousel>
-        </div>
         <p className="text-slate-300 mt-5" >You can see more of my work on <Link className="underline" href={"https://github.com/sushantn16"} target="_blank">Github</Link>.</p>
       </div>
 
