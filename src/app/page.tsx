@@ -40,7 +40,7 @@ export default function Home() {
   const projects = [
     {
       name: "Reservations",
-      description: "This is a full stack application under way, which allows users to make reservations to a restraunt, also allow them to order food online. Users can also manage their orders and reservations here.",
+      description: "This is a full stack application under way, which allows users to make reservations to a restaurant, also allow them to order food online. Users can also manage their orders and reservations here.",
       href: "https://github.com/sushantn16/reservations",
       github: "https://github.com/sushantn16/reservations"
     },
@@ -71,7 +71,7 @@ export default function Home() {
   ]
 
   return (
-    <main className="min-h-screen p-10 md:p-24 font-mono bg-black text-white relative">
+    <main className="min-h-screen p-8 md:p-24 font-mono bg-black text-white relative">
       <div className="fixed bottom-10 right-10">
         <TooltipProvider>
           <Tooltip>
@@ -94,7 +94,7 @@ export default function Home() {
       </div>
       <div className='flex flex-col items-center text-center'>
         <div className="gradient-bg">
-          <p className='text-3xl font-sans md:text-8xl gradient-text'>Sushant Nandwani</p>
+          <p className='text-4xl font-sans md:text-8xl gradient-text'>Sushant Nandwani</p>
         </div>
 
         <p className='text-slate-300 text-center text-sm mt-2'>Software Engineer | Full-stack Developer</p>
@@ -119,10 +119,10 @@ export default function Home() {
         <p className="text-2xl">Projects</p>
         <p className="text-slate-300 mt-3">Some of the projects are from work and some are on my own time.</p>
         <div className="w-full h-px bg-zinc-800 mt-5" />
-        <div className="grid grid-cols-3 gap-5 mt-10">
+        <div className="flex overflow-auto md:grid grid-cols-3 gap-5 mt-10">
           {projects.map((project, i) =>
 
-            <Card className="duration-700 group bg-black h-72 border-zinc-500 group-hover:border-zinc-200 duration-1000 text-zinc-200 group-hover:text-white flex flex-col justify-between" key={i}>
+            <Card className="group bg-black h-min-72 min-w-72 border-zinc-500 group-hover:border-zinc-200 duration-1000 text-zinc-200 group-hover:text-white flex flex-col justify-between" key={i}>
               <div>
                 <CardHeader className="text-xl py-5">
                   {project.name}
