@@ -34,7 +34,7 @@ export default function Home() {
     },
   ];
   const skills = [
-    "NextJS", "React", "Angular", "MaterialUI", "ShadCN", "HTML", "CSS", "TypeScript", "JavaScript", "NodeJS", "ShadCN", "Python", "C++", "Django", "Firebase", "Vercel", "Azure", "AWS", "SQL", "MongoDB", "Jira", "Git"
+    "NextJS", "React", "Angular","goLang", "MaterialUI", "ShadCN", "HTML", "CSS", "TypeScript", "JavaScript", "NodeJS", "ShadCN", "Python", "C++", "Django", "Firebase", "Vercel", "Azure", "AWS", "SQL", "MongoDB", "Jira", "Git"
   ]
 
   const projects = [
@@ -144,19 +144,20 @@ export default function Home() {
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
-                <TooltipProvider>
-                  <Tooltip>
-                    <TooltipTrigger>
-                      <Link href={project.href} target="_blank" >
-                        <EyeIcon />
-
-                      </Link>
-                    </TooltipTrigger>
-                    <TooltipContent>
-                      <p>Preview</p>
-                    </TooltipContent>
-                  </Tooltip>
-                </TooltipProvider>
+                {project.href !== "" &&
+                  <TooltipProvider>
+                    <Tooltip>
+                      <TooltipTrigger>
+                        <Link href={project.href} target="_blank" >
+                          <EyeIcon />
+                        </Link>
+                      </TooltipTrigger>
+                      <TooltipContent>
+                        <p>Preview</p>
+                      </TooltipContent>
+                    </Tooltip>
+                  </TooltipProvider>
+                }
 
               </CardFooter>
             </Card>)}
