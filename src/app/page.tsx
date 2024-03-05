@@ -39,10 +39,10 @@ export default function Home() {
 
   const projects = [
     {
-      name: "Reservations",
-      description: "This is a full stack application under way, which allows users to make reservations to a restaurant, also allow them to order food online. Users can also manage their orders and reservations here.",
-      href: "https://github.com/sushantn16/reservations",
-      github: "https://github.com/sushantn16/reservations"
+      name: "Kanban",
+      description: "This is a full stack application under way, which allows users to make manage tasks, collaborate and track the progress of the project. It is built using NextJs, Prisma, and Postgres.",
+      href: "",
+      github: "https://github.com/sushantn16/kanban"
     },
     {
       name: "Spectrum",
@@ -113,11 +113,11 @@ export default function Home() {
             </div>
           ))}
         </div>
-        <p className="text-slate-300 text-center text-sm mt-5">Currently, I am focusing on improving my web development skills and getting my hands dirty on <Link href={"https://www.rust-lang.org/learn"} target="_blank" className="underline">rust</Link>.</p>
+        <p className="text-slate-300 text-center text-sm mt-5">Currently, I am focusing on improving my web development skills and getting my hands dirty on <Link href="https://go.dev/" target="_blank" className="underline">golang</Link>.</p>
       </div>
       <div className="mt-10">
         <p className="text-2xl">Projects</p>
-        <p className="text-slate-300 mt-3">Some of the projects are from work and some are on my own time.</p>
+        <p className="text-slate-300 mt-3">Some of the projects are i worked on in my own time.</p>
         <div className="w-full h-px bg-zinc-800 mt-5" />
         <div className="flex overflow-auto md:grid grid-cols-3 gap-5 mt-10">
           {projects.map((project, i) =>
