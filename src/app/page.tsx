@@ -135,7 +135,7 @@ export default function Home() {
                 <TooltipProvider>
                   <Tooltip>
                     <TooltipTrigger>
-                      <Link href={project.github}>
+                      <Link href={project.github} target="_blank">
                         <Github />
                       </Link>
                     </TooltipTrigger>
