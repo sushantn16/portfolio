@@ -31,7 +31,7 @@ In CI the gain is "only" 2×, because the step also runs `astro check`, the Type
 
 Removing ESLint quietly removed something: a plugin that checked our Tailwind classes against the real Tailwind config. Our design system replaces most stock Tailwind utilities. A class it doesn't support doesn't fail the build. It just generates no CSS, so the element silently loses its styling.
 
-Biome has a rule for arbitrary values, like `w-[320px]`, but it doesn't know which utilities our config actually supports. So I wrote a small standalone checker that loads the real Tailwind config, presets and plugins included, and fails on any class that wouldn't generate CSS. It checks about 770 files in under a second, and it caught real bugs on its first run.
+Biome has a rule for arbitrary values, like `w-[320px]`, but it doesn't know which utilities our config actually supports. So I wrote a small standalone checker that loads the real Tailwind config, presets and plugins included, and fails on any class that wouldn't generate CSS. It checks about 770 files in under two seconds, and it caught three real bugs on its first run.
 
 ## The lesson that wasn't about Biome
 
