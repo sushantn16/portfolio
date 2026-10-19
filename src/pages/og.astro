@@ -1,0 +1,25 @@
+---
+// Source for public/og.png, the social preview card. To regenerate it, open
+// /og at a 1200×630 viewport and save a screenshot over public/og.png.
+import Base from '../layouts/Base.astro';
+import { profile } from '../data/profile';
+---
+
+<Base title={`${profile.name} · social card`} noindex>
+  <div class="flex h-[630px] w-[1200px] flex-col justify-between overflow-hidden bg-paper p-[72px] [color-scheme:light]">
+    <p class="flex items-center gap-3 font-mono text-[22px] text-ink-2">
+      <span class="size-3 rounded-full bg-accent" aria-hidden="true"></span>
+      {profile.location} · {profile.role}
+    </p>
+    <div>
+      <h1 class="font-serif text-[148px] leading-[0.88] tracking-[-0.035em] text-ink">
+        Sushant <span class="text-ink-2">Nandwani</span>
+      </h1>
+      <p class="mt-8 max-w-[880px] text-[34px] leading-snug tracking-[-0.015em] text-ink">
+        AI-powered products end to end: <span class="text-accent">Java services</span>,
+        the <span class="text-accent">LLM layer</span> and the <span class="text-accent">interface</span>.
+      </p>
+    </div>
+    <p class="font-mono text-[22px] text-ink-3">iamsushant.dev</p>
+  </div>
+</Base>

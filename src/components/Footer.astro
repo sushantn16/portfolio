@@ -1,0 +1,15 @@
+---
+import { profile } from '../data/profile';
+
+const updated = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }).format(new Date());
+---
+
+<footer
+  class="flex flex-wrap justify-between gap-x-8 gap-y-3 border-t border-rule pt-8 pb-12 font-mono text-[0.72rem] leading-relaxed text-ink-3 print:hidden"
+>
+  <span>© {new Date().getFullYear()} {profile.name}</span>
+  <span>Set in Instrument Serif, Geist and Geist Mono. Built with Astro and Tailwind, no client-side JavaScript.</span>
+  <span>
+    Updated {updated} · <a class="link" href="/rss.xml">RSS</a>
+  </span>
+</footer>

@@ -1,0 +1,8 @@
+---
+// Astro 7's default Markdown processor takes no rehype plugins, so links that leave
+// the site get their target here, on the rendered HTML. The input is our own Markdown.
+const html = await Astro.slots.render('default');
+const withTargets = html.replace(/<a href="(https?:\/\/[^"]+)"/g, '<a href="$1" target="_blank" rel="noopener noreferrer"');
+---
+
+<Fragment set:html={withTargets} />

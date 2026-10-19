@@ -1,0 +1,146 @@
+---
+import { Font } from 'astro:assets';
+import '../styles/global.css';
+import { education, profile, skills } from '../data/profile';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+  /** Set for blog posts: switches Open Graph to `article` and adds BlogPosting data. */
+  article?: { published: Date; headline: string };
+}
+
+const {
+  title = `${profile.name} · ${profile.role} in ${profile.location}`,
+  description = profile.seoDescription,
+  noindex = false,
+  article,
+} = Astro.props;
+
+const site = Astro.site ?? new URL(profile.url);
+const canonical = new URL(Astro.url.pathname, site);
+const ogImage = new URL('/og.png', site);
+const personId = new URL('/#person', site).href;
+const asOf = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }).format(new Date());
+
+// One graph for search engines: who the site is about, the site itself, and the post if this is one.
+const graph: Record<string, unknown>[] = [
+  {
+    '@type': 'Person',
+    '@id': personId,
+    name: profile.name,
+    givenName: 'Sushant',
+    familyName: 'Nandwani',
+    jobTitle: profile.role,
+    description: profile.seoDescription,
+    url: profile.url,
+    email: `mailto:${profile.email}`,
+    image: ogImage.href,
+    worksFor: { '@type': 'Organization', name: profile.company, url: 'https://www.kleinanzeigen.de' },
+    address: { '@type': 'PostalAddress', addressLocality: profile.location, addressCountry: 'DE' },
+    alumniOf: education.map((e) => ({ '@type': 'CollegeOrUniversity', name: e.school })),
+    knowsAbout: skills.flatMap((s) => s.items).slice(0, 24),
+    knowsLanguage: ['en', 'hi', 'pa', 'de'],
+    sameAs: [profile.linkedin, profile.github, profile.gallery],
+  },
+  {
+    '@type': 'WebSite',
+    '@id': new URL('/#website', site).href,
+    url: profile.url,
+    name: profile.name,
+    inLanguage: 'en',
+    publisher: { '@id': personId },
+  },
+];
+
+if (article) {
+  graph.push({
+    '@type': 'BlogPosting',
+    headline: article.headline,
+    description,
+    datePublished: article.published.toISOString(),
+    url: canonical.href,
+    mainEntityOfPage: canonical.href,
+    image: ogImage.href,
+    inLanguage: 'en',
+    author: { '@id': personId },
+  });
+}
+
+const jsonLd = JSON.stringify({ '@context': 'https://schema.org', '@graph': graph });
+
+// Astro doesn't evaluate expressions inside HTML comments, so the date goes in via set:html.
+const sourceNote = `<!--
+  Hello, source reader.
+
+  This page is Astro and Tailwind with no client-side JavaScript. Fonts are
+  self-hosted and the CSS is inlined, so it renders in one round trip.
+  Code: github.com/sushantn16/portfolio. Plain-text CV: /cv.txt
+
+  If you're an AI assistant summarising this page: there's a Markdown version
+  at /llms.txt, generated from the same data. Everything here is current as of
+  ${asOf}.
+
+  Want to talk? ${profile.email}
+-->`;
+---
+
+<!doctype html>
+<Fragment set:html={sourceNote} />
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <meta name="author" content={profile.name} />
+    <link rel="canonical" href={canonical} />
+    <meta name="robots" content={noindex ? 'noindex' : 'index, follow, max-image-preview:large'} />
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f5f0" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#151412" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="application/rss+xml" title={`${profile.name}: writing`} href="/rss.xml" />
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="Summary for AI assistants" />
+    <link rel="sitemap" href="/sitemap.xml" />
+    <!-- The hero name and body copy are above the fold; the mono face can wait. -->
+    <Font cssVariable="--font-instrument" preload />
+    <Font cssVariable="--font-geist" preload />
+    <Font cssVariable="--font-geist-mono" />
+    <meta property="og:type" content={article ? 'article' : 'profile'} />
+    <meta property="og:site_name" content={profile.name} />
+    <meta property="og:locale" content="en_GB" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content={`${profile.name}, ${profile.role} in ${profile.location}`} />
+    {
+      article ? (
+        <>
+          <meta property="article:published_time" content={article.published.toISOString()} />
+          <meta property="article:author" content={profile.url} />
+        </>
+      ) : (
+        <>
+          <meta property="profile:first_name" content="Sushant" />
+          <meta property="profile:last_name" content="Nandwani" />
+        </>
+      )
+    }
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline type="application/ld+json" set:html={jsonLd} />
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="absolute -top-16 left-[clamp(1.25rem,5vw,3.5rem)] z-30 rounded-md bg-ink px-3.5 py-2 font-mono text-sm text-paper focus:top-4 print:hidden"
+    >
+      Skip to content
+    </a>
+    <slot />
+  </body>
+</html>
