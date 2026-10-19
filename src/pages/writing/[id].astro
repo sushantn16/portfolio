@@ -60,16 +60,22 @@ const { Content } = await render(post);
           <ExternalLinksInNewTab><Content /></ExternalLinksInNewTab>
         </div>
 
-        {
-          post.data.linkedin && (
-            <p class="mt-12 font-mono text-[0.8rem] text-ink-3">
-              Also posted on{' '}
-              <a class="group link text-ink-2" href={post.data.linkedin} target="_blank" rel="noopener noreferrer">
-                LinkedIn <Arrow />
-              </a>
-            </p>
-          )
-        }
+        <div class="mt-12 grid gap-1.5 font-mono text-[0.8rem] text-ink-3 print:hidden">
+          {
+            post.data.linkedin && (
+              <p>
+                Also posted on{' '}
+                <a class="group link text-ink-2" href={post.data.linkedin} target="_blank" rel="noopener noreferrer">
+                  LinkedIn <Arrow />
+                </a>
+              </p>
+            )
+          }
+          <p>
+            Get the next one by feed:{' '}
+            <a class="group link text-ink-2" href="/rss.xml">RSS <Arrow internal /></a>
+          </p>
+        </div>
       </article>
 
       <nav class="mt-16 grid gap-6 border-t border-rule pt-8 sm:grid-cols-2 print:hidden" aria-label="More writing">
