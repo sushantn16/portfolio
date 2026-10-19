@@ -1,0 +1,40 @@
+---
+// Shared with Stilllight (iamsushant.dev/photos): the markup, sizes and view-transition names must match
+// its .site-bar in src/styles/gallery.css, so the bar stays put and the line slides between the two sites.
+interface Props {
+  active?: 'about' | 'writing' | 'photos';
+}
+
+const { active } = Astro.props;
+
+const items = [
+  { id: 'about', label: 'About', href: '/' },
+  { id: 'writing', label: 'Writing', href: '/#writing' },
+  { id: 'photos', label: 'Photos', href: '/photos/' },
+] as const;
+---
+
+<header
+  class="mx-auto flex w-full max-w-[70rem] items-baseline justify-between gap-4 px-[clamp(1.25rem,5vw,3.5rem)] py-6 [view-transition-name:site-bar] print:hidden"
+>
+  <a class="font-serif text-[1.35rem] leading-none tracking-[-0.01em] text-ink" href="/">Sushant Nandwani</a>
+  <nav aria-label="Site" class="flex gap-6 font-mono text-[0.8rem] leading-none">
+    {
+      items.map((item) => (
+        <a
+          href={item.href}
+          aria-current={item.id === active ? 'page' : undefined}
+          class="relative text-ink-2 transition-colors hover:text-ink aria-[current=page]:text-ink"
+        >
+          {item.label}
+          {item.id === active && (
+            <span
+              aria-hidden="true"
+              class="absolute inset-x-0 -bottom-[0.45rem] h-px bg-accent [view-transition-name:nav-indicator]"
+            />
+          )}
+        </a>
+      ))
+    }
+  </nav>
+</header>
