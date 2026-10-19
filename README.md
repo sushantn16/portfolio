@@ -10,6 +10,7 @@ Built with Astro and Tailwind CSS. It ships no client-side JavaScript.
 - `curl iamsushant.dev/cv.txt` returns the CV as plain text.
 - Print the page (or save it as a PDF) and you get a two-page CV.
 - View the page source.
+- `/llms.txt` is a Markdown summary for AI assistants ([llmstxt.org](https://llmstxt.org)), from the same data.
 
 ## Performance
 
@@ -32,7 +33,7 @@ What keeps it fast:
 ## Editing
 
 All copy lives in [`src/data/profile.ts`](src/data/profile.ts): about, experience, skills, projects,
-writing and interests. The page, the printed CV and `/cv.txt` all read from it.
+writing and interests. The page, the printed CV, `/cv.txt` and `/llms.txt` all read from it.
 
 ```sh
 npm install

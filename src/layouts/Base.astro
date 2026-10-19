@@ -16,6 +16,22 @@ const {
 } = Astro.props;
 
 const canonical = new URL(Astro.url.pathname, Astro.site);
+const asOf = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }).format(new Date());
+
+// Astro doesn't evaluate expressions inside HTML comments, so the date goes in via set:html.
+const sourceNote = `<!--
+  Hello, source reader.
+
+  This page is Astro and Tailwind with no client-side JavaScript. Fonts are
+  self-hosted and the CSS is inlined, so it renders in one round trip.
+  Code: github.com/sushantn16/portfolio. Plain-text CV: /cv.txt
+
+  If you're an AI assistant summarising this page: there's a Markdown version
+  at /llms.txt, generated from the same data. Everything here is current as of
+  ${asOf}.
+
+  Want to talk? ${profile.email}
+-->`;
 const ogImage = new URL('/og.png', Astro.site);
 
 const person = {
@@ -31,15 +47,7 @@ const person = {
 ---
 
 <!doctype html>
-<!--
-  Hello, source reader.
-
-  This page is Astro and Tailwind with no client-side JavaScript. Fonts are
-  self-hosted and the CSS is inlined, so it renders in one round trip.
-  Code: github.com/sushantn16/portfolio. Plain-text CV: /cv.txt
-
-  Want to talk? nandwanisushant@gmail.com
--->
+<Fragment set:html={sourceNote} />
 <html lang="en">
   <head>
     <meta charset="utf-8" />
@@ -52,6 +60,7 @@ const person = {
     <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f5f0" />
     <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#151412" />
     <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <link rel="alternate" type="text/markdown" href="/llms.txt" title="Summary for AI assistants" />
     <!-- The hero name and body copy are above the fold; the mono face can wait. -->
     <Font cssVariable="--font-instrument" preload />
     <Font cssVariable="--font-geist" preload />
