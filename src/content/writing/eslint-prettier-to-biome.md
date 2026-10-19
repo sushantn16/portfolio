@@ -37,7 +37,7 @@ Biome has a rule for arbitrary values, like `w-[320px]`, but it doesn't know whi
 
 Biome warns about a lot of things. But a lint run that only *warns* exits with code 0, so CI stays green whether a change adds ten warnings or removes them. That was just as true under ESLint, which reported warnings and passed.
 
-So the rule I now follow: **a check either blocks the merge or doesn't belong in CI.** The new class checker reports errors and sits at zero, so it actually gates. The noisy arbitrary-value rule stays a warning on purpose. Making it an error would mean over a hundred suppression comments, and a rule you can only suppress teaches people to suppress rules.
+So the rule I now follow: **if you rely on a check, it has to block the merge. Warnings are hints for the editor, not protection.** The new class checker reports errors and sits at zero, so it actually gates. The noisy arbitrary-value rule stays a warning on purpose, as a hint. Making it an error would mean over a hundred suppression comments, and a rule you can only suppress teaches people to suppress rules.
 
 ## Would I do it again?
 
