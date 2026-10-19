@@ -37,11 +37,11 @@ The best example is still from building Business Hub. Redirecting commercial use
 
 ## The loop: review on every pull request
 
-The last piece runs in GitHub Actions. Every pull request gets an AI review before a human opens it. The review is context-aware: it reads our architecture rules and conventions, and it reviews incrementally, so a new push only gets comments on what changed.
+The last piece runs in GitHub Actions. I built a self-healing pipeline of three agentic workflows: review, suggest and fix. Every pull request gets an AI review before a human opens it. The review is context-aware: it reads our architecture rules and conventions, and it reviews incrementally, so a new push only gets comments on what changed.
 
 It started in one repo. It's now a shared action that other teams are adopting.
 
-Not everything worked. I also built an auto-fix stage that tried to repair failing CI on its own. When I measured it, it almost never fixed the failures it was built for, so I removed it: 548 lines deleted. The lesson: let the model make judgment calls, and let ordinary code do everything deterministic, like deciding what to review, removing duplicate comments and posting the verdict.
+The design rule that made it work: let the model make judgment calls, and let ordinary code do everything deterministic, like deciding what to review, removing duplicate comments and posting the verdict.
 
 I rewrote the review from scratch as a personal open-source version, [pr-review-agent](https://github.com/sushantn16/pr-review-agent). It works with any OpenAI-compatible model.
 

@@ -65,7 +65,7 @@ export const work: Job[] = [
     highlights: [
       'Architected and led Business Hub, the new portal for commercial sellers, and owned the phased migration of 1M+ users onto it under live production constraints.',
       'Moving features off the Java/Spring MVC monolith into a Spring Boot service with hexagonal architecture: REST endpoints, plus Feign, GraphQL and gRPC clients to downstream services.',
-      'Built AI code review into GitHub Actions and extracted it into a shared action that other teams are adopting. An auto-fix stage was tried and removed once the data showed it rarely fixed failures.',
+      'Built a self-healing pull-request pipeline of three agentic workflows (review, suggest, fix), now a shared GitHub Action other teams are adopting.',
       'Built an internal MCP server with 38 test-data tools, so engineers create test users, ads and accounts from Claude Code instead of an admin UI.',
       'Ran A/B tests across freemium acquisition and onboarding, contributing to 30%+ year-over-year customer growth.',
       'Maintained the shared design system and authored the Playwright end-to-end testing strategy adopted across teams; cut CI/CD time by 60%.',
