@@ -45,6 +45,14 @@ The minifier merged it into a single shorthand, `animation: linear both grow scr
 
 Lighthouse flagged low-contrast text that looked fine to me. The section sitting right at the bottom of the first screen was halfway through its fade-in, and it stays that way until you scroll. Now sections rise without fading, so text is always readable.
 
+## A feed that doesn't shout
+
+Browsers show a raw RSS feed as a wall of XML, so I wanted to style it. The usual answer is an XSLT stylesheet, but Chrome is removing XSLT, and it already puts a red "this functionality is being removed" banner on any page that uses it. I used a plain CSS stylesheet instead. CSS can't make links in XML clickable, so the feed also carries a few XHTML elements under their own namespace. Browsers render those as real links, and feed readers ignore them.
+
+## Live numbers
+
+The site runs on Cloudflare as static files, with no server code. A `_headers` file caches the fingerprinted assets for a year and sets a content security policy of `script-src 'none'`, because there are no scripts to allow. Measured on the live site with the same slow-phone settings: LCP 808 ms, CLS 0.00, and the first byte in 121 ms.
+
 ## Small things I enjoyed
 
 - **Print the page and you get a CV.** The print stylesheet drops the motion and the navigation and stacks each section.
