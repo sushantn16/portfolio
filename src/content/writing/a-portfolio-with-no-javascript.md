@@ -2,7 +2,7 @@
 title: A portfolio with no JavaScript that loads in under a second
 description: What I measured while rebuilding this site, what broke, and how I fixed it.
 date: 2026-10-19
-draft: true
+draft: false
 ---
 
 I rebuilt this site with one rule: it ships no JavaScript to your browser. Everything you see, including the motion, is HTML and CSS. It's built with Astro and Tailwind, and I built it with Claude Code in an afternoon. Most of what I learned came from measuring, not from writing code.

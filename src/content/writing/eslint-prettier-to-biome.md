@@ -2,7 +2,7 @@
 title: 'From ESLint and Prettier to Biome: 60× faster, and what we lost'
 description: One Rust binary instead of five packages, the numbers before and after, and the check we had to rebuild.
 date: 2026-10-19
-draft: true
+draft: false
 ---
 
 Our Business Hub codebase at Kleinanzeigen is about a thousand TypeScript, React and Astro files. For linting and formatting it used ESLint and Prettier, like most JavaScript projects. I replaced both with [Biome](https://biomejs.dev), one tool written in Rust that does both jobs.

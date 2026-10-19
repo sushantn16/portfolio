@@ -2,7 +2,7 @@
 title: 'How I work: a vault for memory, Claude Code for hands, CI for the loop'
 description: The setup behind how I ship. Notes the AI reads and writes, tools it can use, and a review on every pull request.
 date: 2026-10-19
-draft: true
+draft: false
 ---
 
 AI made writing code cheap. Three things are still expensive: context, checking the work, and remembering what happened last week. My setup is built around those three.

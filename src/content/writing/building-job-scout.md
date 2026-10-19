@@ -2,7 +2,7 @@
 title: 'job-scout: an AI pipeline that reads job posts and never applies for me'
 description: Plain code for the rules, four tool-less Claude roles for the judgment, and a human for the final click.
 date: 2026-10-19
-draft: true
+draft: false
 ---
 
 Reading job postings is slow, and most of them fail on details a script could check: a language requirement, the years asked for, a pay band. So I built [job-scout](https://github.com/sushantn16/job-scout), a pipeline that does the reading and prepares the good matches. It never applies on its own.

@@ -2,7 +2,7 @@
 title: A photo gallery that publishes itself
 description: Drop a photo in a folder and it's on the site a few seconds later, with the GPS data stripped.
 date: 2026-10-19
-draft: true
+draft: false
 ---
 
 I take photos of buildings and streets, mostly on a pocket-sized Sony RX100 VII. I wanted to share them without an upload form, without editing a page, and without rebuilding a site every time.
