@@ -1,0 +1,18 @@
+import { defineCollection } from 'astro:content';
+import { glob } from 'astro/loaders';
+import { z } from 'astro/zod';
+
+const writing = defineCollection({
+  loader: glob({ pattern: '**/*.md', base: './src/content/writing' }),
+  schema: z.object({
+    title: z.string(),
+    description: z.string(),
+    date: z.coerce.date(),
+    /** Where the post first appeared, if it was cross-posted. */
+    linkedin: z.url().optional(),
+    /** Drafts render in `astro dev` but are left out of the build. */
+    draft: z.boolean().default(false),
+  }),
+});
+
+export const collections = { writing };

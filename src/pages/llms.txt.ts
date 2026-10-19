@@ -1,12 +1,14 @@
 // /llms.txt (llmstxt.org): a Markdown summary for AI assistants and agents, built from
 // the same data as the page so the two can't disagree.
 import type { APIRoute } from 'astro';
-import { about, education, interests, languages, profile, projects, skills, work, writing } from '../data/profile';
+import { about, beliefs, education, interests, languages, profile, projects, skills, work } from '../data/profile';
+import { getPosts } from '../lib/writing';
 
 const years = (start: string, end: string) => (start === end ? start : `${start} – ${end}`);
 const asOf = new Intl.DateTimeFormat('en-GB', { month: 'long', year: 'numeric' }).format(new Date());
 
-export const GET: APIRoute = () => {
+export const GET: APIRoute = async () => {
+  const posts = await getPosts();
   const md: string[] = [
     `# ${profile.name}`,
     '',
@@ -34,7 +36,13 @@ export const GET: APIRoute = () => {
   for (const p of projects) md.push(`- [${p.name}](${p.href}) (${p.year}): ${p.summary}`);
 
   md.push('', '## Writing', '');
-  for (const w of writing) md.push(`- [${w.title}](${w.href}) (${w.date}): ${w.blurb}`);
+  for (const p of posts) {
+    const url = new URL(`/writing/${p.id}/`, profile.url);
+    md.push(`- [${p.data.title}](${url}) (${p.data.date.toISOString().slice(0, 10)}): ${p.data.description}`);
+  }
+
+  md.push('', '## What I believe', '');
+  for (const b of beliefs) md.push(`- "${b.text}"${b.credit ? ` (borrowed from ${b.credit})` : ''}`);
 
   md.push(
     '',
@@ -47,7 +55,7 @@ export const GET: APIRoute = () => {
     '',
     '## Optional',
     '',
-    ...interests.map((i) => (i.link ? `- [${i.title}](${i.link.href}): ${i.body}` : `- ${i.title}: ${i.body}`)),
+    ...interests.map((i) => (i.link ? `- [${i.title}](${new URL(i.link.href, profile.url)}): ${i.body}` : `- ${i.title}: ${i.body}`)),
     '',
   );
 

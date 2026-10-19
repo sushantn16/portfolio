@@ -1,5 +1,18 @@
+---
+interface Props {
+  /** Announce to screen readers that the link opens a new tab. */
+  newTab?: boolean;
+  /** Point right instead of up-right, for links that stay on this site. */
+  internal?: boolean;
+}
+
+const { newTab = true, internal = false } = Astro.props;
+---
+
 <span
   aria-hidden="true"
-  class="inline-block transition-transform duration-300 ease-soft group-hover:translate-x-[0.12em] group-hover:-translate-y-[0.12em]"
-  >↗</span
->
+  class:list={[
+    'inline-block transition-transform duration-300 ease-soft',
+    internal ? 'group-hover:translate-x-[0.18em]' : 'group-hover:translate-x-[0.12em] group-hover:-translate-y-[0.12em]',
+  ]}>{internal ? '→' : '↗'}</span
+>{newTab && !internal && <span class="sr-only"> (opens in a new tab)</span>}

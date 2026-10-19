@@ -158,3 +158,136 @@
     break-after: avoid;
   }
 }
+
+/* Page-to-page transitions with no JavaScript: the browser cross-fades between pages,
+   and a post title shared by the list and the article morphs between them. */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+
+  ::view-transition-group(*) {
+    animation-duration: 0.45s;
+    animation-timing-function: var(--ease-soft);
+  }
+}
+
+/* Long-form posts. Written by hand rather than with the typography plugin, to match the rest of the site. */
+@layer components {
+  .prose {
+    color: var(--color-ink-2);
+    font-size: 1.125rem;
+    line-height: 1.75;
+    text-wrap: pretty;
+  }
+
+  .prose > * + * {
+    margin-top: 1.25em;
+  }
+
+  .prose h2 {
+    margin-top: 2.2em;
+    font-family: var(--font-serif);
+    font-size: 2rem;
+    line-height: 1.12;
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+
+  .prose h3 {
+    margin-top: 1.8em;
+    font-size: 1.15rem;
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .prose h2 + *,
+  .prose h3 + * {
+    margin-top: 0.75em;
+  }
+
+  .prose strong {
+    font-weight: 600;
+    color: var(--color-ink);
+  }
+
+  .prose a {
+    @apply link;
+    color: var(--color-ink);
+  }
+
+  .prose ul,
+  .prose ol {
+    display: grid;
+    gap: 0.6em;
+  }
+
+  .prose ul > li {
+    position: relative;
+    padding-left: 1.25rem;
+  }
+
+  .prose ul > li::before {
+    content: '';
+    position: absolute;
+    top: 0.85em;
+    left: 0;
+    width: 0.6rem;
+    height: 1px;
+    background: var(--color-ink-3);
+  }
+
+  .prose ol {
+    list-style: decimal;
+    padding-left: 1.25rem;
+  }
+
+  .prose blockquote {
+    border-left: 2px solid var(--color-accent);
+    padding-left: 1.25rem;
+    font-family: var(--font-serif);
+    font-size: 1.6rem;
+    line-height: 1.25;
+    color: var(--color-ink);
+  }
+
+  .prose :not(pre) > code {
+    padding: 0.1em 0.35em;
+    border-radius: 0.3em;
+    background: color-mix(in oklch, var(--color-ink) 6%, transparent);
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    color: var(--color-ink);
+  }
+
+  .prose pre {
+    overflow-x: auto;
+    padding: 1rem 1.25rem;
+    border: 1px solid var(--color-rule);
+    border-radius: 0.6rem;
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    line-height: 1.65;
+  }
+
+  .prose hr {
+    margin-block: 2.5em;
+    border: 0;
+    border-top: 1px solid var(--color-rule);
+  }
+}
+
+/* Code blocks carry both Shiki themes as variables; pick one with the colour scheme. */
+.astro-code,
+.astro-code span {
+  color: var(--shiki-light);
+  background-color: transparent !important;
+}
+
+@media (prefers-color-scheme: dark) {
+  .astro-code,
+  .astro-code span {
+    color: var(--shiki-dark);
+  }
+}

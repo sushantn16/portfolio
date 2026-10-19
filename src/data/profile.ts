@@ -9,9 +9,33 @@ export const profile = {
   url: 'https://iamsushant.dev',
   linkedin: 'https://www.linkedin.com/in/sushantnandwani/',
   github: 'https://github.com/sushantn16',
+  gallery: 'https://sushantn16.github.io/Stilllight/',
+  // For search results: third person, with the name, role, place and stack. Keep it under ~160 characters.
+  seoDescription:
+    'Sushant Nandwani, senior software engineer at Kleinanzeigen in Berlin. Builds AI-powered products end to end: Java and Spring Boot, LLMs, TypeScript and React.',
   description:
     'Senior software engineer in Berlin. I build AI-powered products end to end: Java and Spring Boot services, the LLM layer, and TypeScript and React interfaces.',
 };
+
+/** Where I've lived and worked, from the CV. */
+export const route = [
+  { place: 'Kurukshetra', year: '2016', what: 'BTech' },
+  { place: 'Bangalore', year: '2021', what: 'Capgemini' },
+  { place: 'Koblenz', year: '2022', what: 'MSc' },
+  { place: 'Berlin', year: '2024', what: 'Kleinanzeigen' },
+];
+
+/** Lines from my own posts. `post` is the id of the post each one comes from. */
+export const beliefs = [
+  { text: 'The boring decisions early on are why we move fast now. Not the framework choice.', post: 'building-a-commercial-portal' },
+  { text: 'AI is most useful when you give it context.', post: 'building-a-commercial-portal' },
+  { text: "Legacy migration is unglamorous, and it's where all the user value ships.", post: 'building-a-commercial-portal' },
+  {
+    text: "AI review isn't replacing human review. It means the first human pass starts from a better place.",
+    post: 'ai-code-review-on-every-pull-request',
+  },
+  { text: 'Imagine your code as a bridge. Would you drive over it?', credit: 'Ines Akrap', post: 'would-you-drive-over-your-code' },
+];
 
 export const about = [
   "I'm a senior full-stack engineer at Kleinanzeigen, one of Germany's largest online marketplaces. I work on the tools commercial sellers run their business on, and on the AI features and developer tooling behind them.",
@@ -41,7 +65,7 @@ export const work: Job[] = [
     highlights: [
       'Architected and led Business Hub, the new portal for commercial sellers, and owned the phased migration of 1M+ users onto it under live production constraints.',
       'Moving features off the Java/Spring MVC monolith into a Spring Boot service with hexagonal architecture: REST endpoints, plus Feign, GraphQL and gRPC clients to downstream services.',
-      'Built a self-healing pull-request pipeline of three agentic workflows (review, suggest, fix), now a shared GitHub Action other teams are adopting.',
+      'Built AI code review into GitHub Actions and extracted it into a shared action that other teams are adopting. An auto-fix stage was tried and removed once the data showed it rarely fixed failures.',
       'Built an internal MCP server with 38 test-data tools, so engineers create test users, ads and accounts from Claude Code instead of an admin UI.',
       'Ran A/B tests across freemium acquisition and onboarding, contributing to 30%+ year-over-year customer growth.',
       'Maintained the shared design system and authored the Playwright end-to-end testing strategy adopted across teams; cut CI/CD time by 60%.',
@@ -150,34 +174,6 @@ export const projects: Project[] = [
   },
 ];
 
-export interface Post {
-  title: string;
-  date: string;
-  href: string;
-  blurb: string;
-}
-
-export const writing: Post[] = [
-  {
-    title: 'Building a commercial portal for Kleinanzeigen',
-    date: '2026-04-01',
-    href: 'https://www.linkedin.com/posts/sushantnandwani_building-a-commercial-portal-for-kleinanzeigen-activity-7445125717576572929-FddL',
-    blurb: 'What mattered architecturally, and where AI actually helped.',
-  },
-  {
-    title: 'AI code review on every pull request',
-    date: '2026-04-13',
-    href: 'https://www.linkedin.com/posts/sushantnandwani_ai-is-helping-us-write-more-code-than-ever-activity-7449464965029167104-rg85',
-    blurb: 'Claude Code in GitHub Actions, and why it raises the floor.',
-  },
-  {
-    title: 'Would you drive over your code?',
-    date: '2025-11-01',
-    href: 'https://www.linkedin.com/posts/sushantnandwani_just-got-back-from-performancenow-conference-activity-7390322946655023104-NKYE',
-    blurb: 'Notes from performance.now() in Amsterdam.',
-  },
-];
-
 export interface Interest {
   title: string;
   body: string;
@@ -192,6 +188,11 @@ export const interests: Interest[] = [
   },
   {
     title: 'Running',
-    body: 'I run most weeks, usually long, easy runs through Berlin, and I train for half marathons.',
+    body: 'I run most weeks, usually long, easy runs through Berlin, and I train for half marathons. I also ride, often indoors on Zwift.',
+  },
+  {
+    title: 'In the room',
+    body: "You'll find me at hackathons and conferences: START Hack in St. Gallen, performance.now() in Amsterdam, and volunteering at WeAreDevelopers.",
+    link: { label: 'What I took from performance.now()', href: '/writing/would-you-drive-over-your-code/' },
   },
 ];

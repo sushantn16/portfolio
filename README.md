@@ -30,6 +30,20 @@ What keeps it fast:
 - **Stable layout.** Widths are in `rem` rather than `ch`, which changes with the font. On phones the
   intro paragraph reserves four lines, because the fallback font wraps it one line longer.
 
+## Writing
+
+Posts are Markdown files in [`src/content/writing/`](src/content/writing/). Set `draft: true` in the front matter
+to keep a post out of the build; drafts still show in `npm run dev`. Each post gets its own page, an entry in
+`/rss.xml` and `/sitemap.xml`, and BlogPosting structured data. Clicking a post title morphs it into the
+article heading, using cross-document view transitions, which are CSS only.
+
+## SEO
+
+Every page has a canonical URL, Open Graph tags and one JSON-LD graph: a `Person` (role, employer, universities,
+skills, languages, profiles), the `WebSite`, and a `BlogPosting` on posts. `robots.txt` points to the sitemap.
+After launch: verify the domain in Google Search Console and Bing Webmaster Tools, submit `/sitemap.xml`, and link
+the site from LinkedIn, GitHub and the project READMEs.
+
 ## Editing
 
 All copy lives in [`src/data/profile.ts`](src/data/profile.ts): about, experience, skills, projects,
