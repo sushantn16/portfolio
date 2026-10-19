@@ -65,17 +65,20 @@ that page at a 1200×630 viewport and save a screenshot over the file.
 
 ## Deploying
 
-`.github/workflows/deploy.yml` builds every pull request and deploys `main` to GitHub Pages.
+Hosted on Cloudflare Workers as static assets ([`wrangler.jsonc`](wrangler.jsonc)); no Worker code runs.
+Workers Builds is connected to this repo, so every push to `main` runs `npm run build` and `npx wrangler deploy`.
+The `Build` workflow in GitHub Actions only checks pull requests.
 
-One-time setup for the custom domain:
+[`public/_headers`](public/_headers) caches the fingerprinted `/_astro/` files for a year and sets a strict
+Content-Security-Policy (`script-src 'none'`: the site has no scripts). Cloudflare's JavaScript-based Web
+Analytics would break that promise, so traffic numbers come from Cloudflare's server-side analytics.
 
-1. Repository **Settings → Pages → Source**: GitHub Actions.
-2. At the registrar, point the domain at GitHub Pages: `A` records for the apex to
-   `185.199.108.153`, `185.199.109.153`, `185.199.110.153` and `185.199.111.153`, and a `CNAME`
-   for `www` to `sushantn16.github.io`. On Cloudflare, set these records to DNS only (grey cloud),
-   so that GitHub can issue the certificate.
-3. **Settings → Pages → Custom domain**: `iamsushant.dev`, then tick **Enforce HTTPS** once the
-   certificate is ready. `.dev` domains only work over HTTPS.
+One-time setup:
+
+1. Cloudflare dashboard → **Workers & Pages → Create → Import a repository** → `sushantn16/portfolio`.
+   Build command `npm run build`, deploy command `npx wrangler deploy`, production branch `main`.
+2. The Worker → **Settings → Domains & Routes → Add → Custom domain** → `iamsushant.dev`. Cloudflare creates
+   the DNS record and the certificate. Add `www.iamsushant.dev` too if you want it, with a redirect rule to the apex.
 
 ## License
 
