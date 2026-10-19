@@ -13,12 +13,9 @@
   --color-transparent: transparent;
   --color-current: currentColor;
 
-  --text-display: clamp(3.9rem, 13.5vw, 11rem);
-  --text-display--line-height: 0.86;
-  --text-display--letter-spacing: -0.035em;
-  --text-lede: clamp(1.3rem, 2.5vw, 1.85rem);
-  --text-lede--line-height: 1.32;
-  --text-lede--letter-spacing: -0.015em;
+  --text-statement: clamp(2.3rem, 5.4vw, 4.4rem);
+  --text-statement--line-height: 1.04;
+  --text-statement--letter-spacing: -0.02em;
   --text-headline: clamp(3.25rem, 10vw, 8rem);
   --text-headline--line-height: 0.92;
   --text-headline--letter-spacing: -0.035em;
