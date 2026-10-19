@@ -5,7 +5,8 @@ export type Post = CollectionEntry<'writing'>;
 /** Published posts, newest first. Drafts are included only in `astro dev`. */
 export async function getPosts(): Promise<Post[]> {
   const posts = await getCollection('writing', ({ data }) => import.meta.env.DEV || !data.draft);
-  return posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime());
+  // Same-day posts need a tie-breaker, or their order (and the home page's top three) can change between builds.
+  return posts.sort((a, b) => b.data.date.getTime() - a.data.date.getTime() || b.id.localeCompare(a.id));
 }
 
 export function readingTime(body = ''): string {
