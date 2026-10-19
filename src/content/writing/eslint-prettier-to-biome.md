@@ -1,7 +1,7 @@
 ---
 title: 'From ESLint and Prettier to Biome: 60× faster, and what we lost'
 description: One Rust binary instead of five packages, the numbers before and after, and the check we had to rebuild.
-date: 2026-10-19
+date: 2026-09-11
 draft: false
 ---
 

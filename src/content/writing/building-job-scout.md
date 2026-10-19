@@ -1,7 +1,7 @@
 ---
 title: 'job-scout: an AI pipeline that reads job posts and never applies for me'
 description: Plain code for the rules, four tool-less Claude roles for the judgment, and a human for the final click.
-date: 2026-10-19
+date: 2026-10-17
 draft: false
 ---
 
