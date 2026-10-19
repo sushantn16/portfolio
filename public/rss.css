@@ -1,0 +1,122 @@
+/* Styles /rss.xml when it's opened in a browser. Feed readers never load this.
+   Colours mirror src/styles/global.css. The site's fonts have hashed file names,
+   so this falls back to system faces with a similar feel. */
+
+@namespace h url(http://www.w3.org/1999/xhtml);
+@namespace atom url(http://www.w3.org/2005/Atom);
+
+rss {
+  --paper: light-dark(oklch(97.6% 0.006 85), oklch(17.5% 0.005 75));
+  --ink: light-dark(oklch(21% 0.012 70), oklch(94% 0.008 85));
+  --ink-2: light-dark(oklch(42% 0.012 70), oklch(76% 0.01 85));
+  --ink-3: light-dark(oklch(52% 0.01 70), oklch(63% 0.01 85));
+  --rule: light-dark(oklch(89% 0.008 85), oklch(28% 0.006 85));
+  --accent: light-dark(oklch(52% 0.165 38), oklch(75% 0.13 50));
+  --serif: 'Iowan Old Style', 'Palatino Linotype', Palatino, Georgia, serif;
+  --sans: system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --mono: ui-monospace, 'SF Mono', Menlo, Consolas, monospace;
+
+  color-scheme: light dark;
+  display: block;
+  min-height: 100vh;
+  margin: 0;
+  padding: clamp(3rem, 10vw, 7rem) clamp(1.25rem, 5vw, 3.5rem) 6rem;
+  background: var(--paper);
+  color: var(--ink);
+  font: 17px/1.6 var(--sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+channel {
+  display: block;
+  max-width: 42rem;
+  margin: 0 auto;
+}
+
+/* Feed metadata is for readers, not people. */
+channel > title,
+channel > link,
+channel > description,
+channel > language,
+atom|link,
+item > link,
+item > guid,
+item > pubDate {
+  display: none;
+}
+
+h|header.intro {
+  display: block;
+  padding-bottom: 2.5rem;
+  margin-bottom: 1rem;
+  border-bottom: 1px solid var(--rule);
+}
+
+h|p {
+  margin: 0;
+}
+
+h|p.eyebrow,
+h|p.date,
+h|p.links {
+  font: 0.8rem/1.6 var(--mono);
+  color: var(--ink-3);
+}
+
+h|h1 {
+  margin: 0.75rem 0 1.25rem;
+  font: 400 clamp(2.4rem, 7vw, 3.75rem) / 1 var(--serif);
+  letter-spacing: -0.02em;
+}
+
+h|p.lede {
+  color: var(--ink-2);
+}
+
+h|code {
+  display: inline-block;
+  margin: 0.75rem 0 1.5rem;
+  padding: 0.3rem 0.6rem;
+  border: 1px solid var(--rule);
+  border-radius: 0.4rem;
+  font: 0.85rem var(--mono);
+  color: var(--ink);
+  user-select: all;
+}
+
+h|a {
+  color: inherit;
+  text-decoration: underline 1px var(--rule);
+  text-underline-offset: 0.24em;
+}
+
+h|a:hover {
+  text-decoration-color: var(--accent);
+  color: var(--accent);
+}
+
+item {
+  display: block;
+  padding: 1.75rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+
+item > title {
+  display: block;
+  margin-top: 0.25rem;
+  font: 400 1.9rem/1.15 var(--serif);
+  letter-spacing: -0.015em;
+}
+
+item > description {
+  display: block;
+  margin-top: 0.4rem;
+  color: var(--ink-2);
+}
+
+h|a.read {
+  display: inline-block;
+  margin-top: 0.75rem;
+  font: 0.8rem var(--mono);
+  color: var(--ink-2);
+}

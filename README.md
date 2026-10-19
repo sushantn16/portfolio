@@ -37,6 +37,10 @@ to keep a post out of the build; drafts still show in `npm run dev`. Each post g
 `/rss.xml` and `/sitemap.xml`, and BlogPosting structured data. Clicking a post title morphs it into the
 article heading, using cross-document view transitions, which are CSS only.
 
+Opened in a browser, `/rss.xml` is styled by `public/rss.css`. That's CSS rather than XSLT: Chrome 155 still runs XSLT,
+but it puts a red "being removed" banner on the page. CSS can't make links in XML clickable, so the feed carries a few
+XHTML-namespaced elements (an intro and "Read the post" links). Browsers render those as HTML; feed readers ignore them.
+
 ## SEO
 
 Every page has a canonical URL, Open Graph tags and one JSON-LD graph: a `Person` (role, employer, universities,
