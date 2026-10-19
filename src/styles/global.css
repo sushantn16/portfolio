@@ -1,0 +1,160 @@
+@import 'tailwindcss';
+
+/* A deliberately small palette: paper, three inks, one rule colour, one accent.
+   Each value switches with the system colour scheme. */
+@theme {
+  --color-*: initial;
+  --color-paper: light-dark(oklch(97.6% 0.006 85), oklch(17.5% 0.005 75));
+  --color-ink: light-dark(oklch(21% 0.012 70), oklch(94% 0.008 85));
+  --color-ink-2: light-dark(oklch(42% 0.012 70), oklch(76% 0.01 85));
+  --color-ink-3: light-dark(oklch(52% 0.01 70), oklch(63% 0.01 85));
+  --color-rule: light-dark(oklch(89% 0.008 85), oklch(28% 0.006 85));
+  --color-accent: light-dark(oklch(52% 0.165 38), oklch(75% 0.13 50));
+  --color-transparent: transparent;
+  --color-current: currentColor;
+
+  --text-display: clamp(3.9rem, 13.5vw, 11rem);
+  --text-display--line-height: 0.86;
+  --text-display--letter-spacing: -0.035em;
+  --text-lede: clamp(1.3rem, 2.5vw, 1.85rem);
+  --text-lede--line-height: 1.32;
+  --text-lede--letter-spacing: -0.015em;
+  --text-headline: clamp(3.25rem, 10vw, 8rem);
+  --text-headline--line-height: 0.92;
+  --text-headline--letter-spacing: -0.035em;
+  --text-project: clamp(1.9rem, 4vw, 2.75rem);
+  --text-project--line-height: 1.05;
+  --text-project--letter-spacing: -0.02em;
+  --text-section: 2.1rem;
+  --text-section--line-height: 1.05;
+  --text-section--letter-spacing: -0.015em;
+
+  --ease-soft: cubic-bezier(0.2, 0.7, 0.2, 1);
+  --animate-rise: rise 1s var(--ease-soft) both;
+}
+
+@theme inline {
+  --font-serif: var(--font-instrument);
+  --font-sans: var(--font-geist);
+  --font-mono: var(--font-geist-mono);
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    translate: 0 1.25rem;
+  }
+}
+
+/* Motion only, no fade: a section half-revealed at the fold must stay readable. */
+@keyframes lift {
+  from {
+    translate: 0 2rem;
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: light dark;
+  }
+
+  body {
+    @apply bg-paper font-sans text-ink antialiased;
+  }
+
+  ::selection {
+    background: color-mix(in oklch, var(--color-accent) 28%, transparent);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    html {
+      scroll-behavior: smooth;
+    }
+  }
+}
+
+@utility link {
+  text-decoration-line: underline;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--color-rule);
+  text-underline-offset: 0.24em;
+  transition:
+    text-decoration-color 0.2s,
+    color 0.2s;
+
+  &:hover {
+    text-decoration-color: var(--color-accent);
+  }
+}
+
+/* Sections rise into place as they scroll into view. Pure CSS, so browsers without
+   scroll-driven animations simply show the content. */
+@utility reveal {
+  @media (prefers-reduced-motion: no-preference) {
+    @supports (animation-timeline: view()) {
+      /* Longhands on purpose: the minifier folds a shorthand plus
+         animation-timeline into one declaration that Chrome rejects. */
+      animation-name: lift;
+      animation-timing-function: linear;
+      animation-fill-mode: both;
+      animation-timeline: view();
+      animation-range: entry 0% entry 30%;
+    }
+  }
+}
+
+/* A hairline at the top of the viewport that fills as you scroll. */
+@utility progress {
+  transform: scaleX(0);
+  transform-origin: left;
+
+  @supports (animation-timeline: scroll()) {
+    animation-name: grow;
+    animation-timing-function: linear;
+    animation-fill-mode: both;
+    animation-timeline: scroll(root);
+  }
+}
+
+@keyframes grow {
+  to {
+    transform: scaleX(1);
+  }
+}
+
+/* Printing the page gives a CV: light colours, one column of content, no chrome. */
+@media print {
+  @page {
+    margin: 14mm 16mm;
+  }
+
+  /* Every size is in rem, so scaling the root scales the whole CV. */
+  :root {
+    color-scheme: light;
+    font-size: 10.5px;
+  }
+
+  body {
+    background: none;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+  }
+
+  li li,
+  dl > div,
+  h2,
+  h3 {
+    break-inside: avoid;
+    break-after: avoid;
+  }
+}

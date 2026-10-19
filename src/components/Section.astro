@@ -1,0 +1,29 @@
+---
+interface Props {
+  id: string;
+  index: string;
+  title: string;
+  /** Leave the section out of the printed CV. */
+  screenOnly?: boolean;
+}
+
+const { id, index, title, screenOnly = false } = Astro.props;
+---
+
+<section
+  id={id}
+  aria-labelledby={`${id}-title`}
+  class:list={[
+    'reveal grid gap-7 border-t border-rule py-[clamp(3.5rem,9vw,6.5rem)] lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-14',
+    'print:block print:py-4',
+    screenOnly && 'print:hidden',
+  ]}
+>
+  <header class="lg:sticky lg:top-10 lg:self-start print:static print:mb-3">
+    <span class="font-mono text-xs tracking-wider text-ink-3 print:hidden">{index}</span>
+    <h2 id={`${id}-title`} class="mt-1.5 font-serif text-section print:mt-0 print:text-[16pt]">{title}</h2>
+  </header>
+  <div class="min-w-0">
+    <slot />
+  </div>
+</section>

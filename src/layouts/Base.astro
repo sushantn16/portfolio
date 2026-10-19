@@ -1,0 +1,78 @@
+---
+import { Font } from 'astro:assets';
+import '../styles/global.css';
+import { profile } from '../data/profile';
+
+interface Props {
+  title?: string;
+  description?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = `${profile.name} · ${profile.role}`,
+  description = profile.description,
+  noindex = false,
+} = Astro.props;
+
+const canonical = new URL(Astro.url.pathname, Astro.site);
+const ogImage = new URL('/og.png', Astro.site);
+
+const person = {
+  '@context': 'https://schema.org',
+  '@type': 'Person',
+  name: profile.name,
+  jobTitle: profile.role,
+  worksFor: { '@type': 'Organization', name: profile.company },
+  address: { '@type': 'PostalAddress', addressLocality: profile.location, addressCountry: 'DE' },
+  url: profile.url,
+  sameAs: [profile.linkedin, profile.github],
+};
+---
+
+<!doctype html>
+<!--
+  Hello, source reader.
+
+  This page is Astro and Tailwind with no client-side JavaScript. Fonts are
+  self-hosted and the CSS is inlined, so it renders in one round trip.
+  Code: github.com/sushantn16/portfolio. Plain-text CV: /cv.txt
+
+  Want to talk? nandwanisushant@gmail.com
+-->
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="color-scheme" content="light dark" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#f7f5f0" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#151412" />
+    <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
+    <!-- The hero name and body copy are above the fold; the mono face can wait. -->
+    <Font cssVariable="--font-instrument" preload />
+    <Font cssVariable="--font-geist" preload />
+    <Font cssVariable="--font-geist-mono" />
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <script is:inline type="application/ld+json" set:html={JSON.stringify(person)} />
+  </head>
+  <body>
+    <a
+      href="#main"
+      class="absolute -top-16 left-[clamp(1.25rem,5vw,3.5rem)] z-30 print:hidden rounded-md bg-ink px-3.5 py-2 font-mono text-sm text-paper focus:top-4"
+    >
+      Skip to content
+    </a>
+    <slot />
+  </body>
+</html>
