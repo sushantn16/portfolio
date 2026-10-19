@@ -1,7 +1,7 @@
 # iamsushant.dev
 
 My personal site: who I am, what I work on, and a CV. Photos live separately on
-[Stilllight](https://sushantn16.github.io/Stilllight/).
+[Stilllight](https://photos.iamsushant.dev/).
 
 Built with Astro and Tailwind CSS. It ships no client-side JavaScript.
 

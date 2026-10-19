@@ -9,7 +9,7 @@ export const profile = {
   url: 'https://iamsushant.dev',
   linkedin: 'https://www.linkedin.com/in/sushantnandwani/',
   github: 'https://github.com/sushantn16',
-  gallery: 'https://sushantn16.github.io/Stilllight/',
+  gallery: 'https://photos.iamsushant.dev/',
   // For search results: third person, with the name, role, place and stack. Keep it under ~160 characters.
   seoDescription:
     'Sushant Nandwani, senior software engineer at Kleinanzeigen in Berlin. Builds AI-powered products end to end: Java and Spring Boot, LLMs, TypeScript and React.',
@@ -166,7 +166,7 @@ export const projects: Project[] = [
   {
     name: 'Stilllight',
     year: '2025',
-    href: 'https://sushantn16.github.io/Stilllight/',
+    href: 'https://photos.iamsushant.dev/',
     source: 'https://github.com/sushantn16/Stilllight',
     summary:
       'A photo gallery that publishes itself. Drop a photo in a folder and it is resized, stripped of GPS data and uploaded to Cloudflare R2, then appears on the site with no rebuild.',
@@ -184,7 +184,7 @@ export const interests: Interest[] = [
   {
     title: 'Photography',
     body: 'I photograph buildings and streets, mostly on a pocket-sized Sony RX100 VII. The photos live on Stilllight, a gallery I built that publishes itself.',
-    link: { label: 'See the photos on Stilllight', href: 'https://sushantn16.github.io/Stilllight/' },
+    link: { label: 'See the photos on Stilllight', href: 'https://photos.iamsushant.dev/' },
   },
   {
     title: 'Running',
