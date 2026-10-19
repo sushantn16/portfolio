@@ -1,0 +1,78 @@
+---
+import Base from '../../layouts/Base.astro';
+import TopBar from '../../components/TopBar.astro';
+import Footer from '../../components/Footer.astro';
+import Arrow from '../../components/Arrow.astro';
+import { profile } from '../../data/profile';
+import { getPosts, readingTime, transitionName } from '../../lib/writing';
+
+const posts = await getPosts();
+
+// An archive grouped by year, newest first.
+const byYear = Map.groupBy(posts, (post) => post.data.date.getFullYear());
+const years = [...byYear.keys()].sort((a, b) => b - a);
+const dayMonth = new Intl.DateTimeFormat('en-GB', { day: 'numeric', month: 'short' });
+---
+
+<Base
+  title={`Writing · ${profile.name}`}
+  description="Notes on building software: AI in the delivery loop, frontend architecture, and making things fast."
+>
+  <TopBar active="writing" />
+  <div class="mx-auto max-w-[70rem] px-[clamp(1.25rem,5vw,3.5rem)]">
+    <main id="main" class="pt-[clamp(3rem,9vw,6rem)] pb-24">
+      <header class="max-w-[42rem]">
+        <p class="flex items-center gap-2.5 font-mono text-[0.8rem] text-ink-2">
+          <span class="size-[0.45rem] rounded-full bg-accent" aria-hidden="true"></span>
+          Writing · {posts.length} {posts.length === 1 ? 'post' : 'posts'}
+        </p>
+        <h1 class="mt-6 font-serif text-[clamp(3rem,8vw,5.5rem)] leading-[0.95] tracking-[-0.03em]">Writing</h1>
+        <p class="mt-6 text-[clamp(1.15rem,2vw,1.35rem)] leading-normal text-pretty text-ink-2">
+          Notes on building software: AI in the delivery loop, frontend architecture, and making things fast. Most of it
+          also goes out on LinkedIn.
+        </p>
+        <p class="mt-6 font-mono text-[0.8rem] text-ink-3">
+          Follow along by feed: <a class="group link text-ink-2" href="/rss.xml">RSS <Arrow internal /></a>
+        </p>
+      </header>
+
+      {
+        years.map((year) => (
+          <section class="mt-16 grid gap-4 border-t border-rule pt-8 lg:grid-cols-[13rem_minmax(0,1fr)] lg:gap-14" aria-labelledby={`y${year}`}>
+            <h2 id={`y${year}`} class="font-serif text-section lg:sticky lg:top-10 lg:self-start">
+              {year}
+            </h2>
+            <ul role="list">
+              {byYear.get(year)!.map((post) => (
+                <li class="[&:first-child>a]:pt-0">
+                  <a
+                    href={`/writing/${post.id}/`}
+                    class="group grid gap-x-6 gap-y-1 border-b border-rule py-5 sm:grid-cols-[5.5rem_minmax(0,1fr)_auto] sm:items-baseline"
+                  >
+                    <time class="font-mono text-[0.78rem] text-ink-3" datetime={post.data.date.toISOString().slice(0, 10)}>
+                      {dayMonth.format(post.data.date)}
+                    </time>
+                    <span class="grid gap-0.5">
+                      <span
+                        class="w-fit text-[1.2rem] font-medium tracking-[-0.012em] transition-colors group-hover:text-accent"
+                        style={`view-transition-name: ${transitionName(post)}`}
+                      >
+                        {post.data.title}
+                      </span>
+                      <span class="text-ink-2">{post.data.description}</span>
+                    </span>
+                    <span class="font-mono text-[0.78rem] text-ink-3">
+                      {post.data.draft ? 'Draft' : readingTime(post.body)}
+                    </span>
+                  </a>
+                </li>
+              ))}
+            </ul>
+          </section>
+        ))
+      }
+    </main>
+
+    <Footer />
+  </div>
+</Base>

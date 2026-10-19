@@ -9,6 +9,7 @@ export const GET: APIRoute = async ({ site }) => {
 
   const pages = [
     { loc: new URL('/', base).href, lastmod: day(new Date()) },
+    { loc: new URL('/writing/', base).href, lastmod: posts[0] ? day(posts[0].data.date) : day(new Date()) },
     // Served by the separate Stilllight Worker on the same domain.
     { loc: new URL('/photos/', base).href, lastmod: day(new Date()) },
     ...posts.map((p) => ({ loc: new URL(`/writing/${p.id}/`, base).href, lastmod: day(p.data.date) })),
