@@ -42,7 +42,7 @@ const graph: Record<string, unknown>[] = [
     alumniOf: education.map((e) => ({ '@type': 'CollegeOrUniversity', name: e.school })),
     knowsAbout: skills.flatMap((s) => s.items).slice(0, 24),
     knowsLanguage: ['en', 'hi', 'pa', 'de'],
-    sameAs: [profile.linkedin, profile.github, profile.gallery],
+    sameAs: [profile.linkedin, profile.github],
   },
   {
     '@type': 'WebSite',

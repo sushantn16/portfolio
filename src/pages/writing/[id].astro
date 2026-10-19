@@ -3,6 +3,7 @@ import { render } from 'astro:content';
 import Base from '../../layouts/Base.astro';
 import Arrow from '../../components/Arrow.astro';
 import Footer from '../../components/Footer.astro';
+import TopBar from '../../components/TopBar.astro';
 import ExternalLinksInNewTab from '../../components/ExternalLinksInNewTab.astro';
 import { profile } from '../../data/profile';
 import { getPosts, postDate, readingTime, transitionName, type Post } from '../../lib/writing';
@@ -31,15 +32,10 @@ const { Content } = await render(post);
   article={{ published: post.data.date, headline: post.data.title }}
   noindex={post.data.draft}
 >
+  <TopBar active="writing" />
   <div class="mx-auto max-w-[70rem] px-[clamp(1.25rem,5vw,3.5rem)]">
-    <nav class="pt-10 font-mono text-[0.8rem] text-ink-2 print:hidden" aria-label="Site">
-      <a class="group link" href="/#writing">
-        <span aria-hidden="true" class="inline-block transition-transform duration-300 ease-soft group-hover:-translate-x-[0.18em]">←</span>{' '}
-        {profile.name}
-      </a>
-    </nav>
 
-    <main id="main" class="mx-auto max-w-[42rem] pt-[clamp(4rem,12vw,8rem)] pb-24">
+    <main id="main" class="mx-auto max-w-[42rem] pt-[clamp(3rem,9vw,6rem)] pb-24">
       <article>
         <header>
           <p class="font-mono text-[0.78rem] text-ink-3">

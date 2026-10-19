@@ -3,6 +3,7 @@ import Base from '../layouts/Base.astro';
 import Section from '../components/Section.astro';
 import Arrow from '../components/Arrow.astro';
 import Footer from '../components/Footer.astro';
+import TopBar from '../components/TopBar.astro';
 import { about, beliefs, education, interests, languages, profile, projects, route, skills, work } from '../data/profile';
 import { getPosts, postDate, transitionName } from '../lib/writing';
 
@@ -11,6 +12,9 @@ const postTitle = (id: string) => posts.find((p) => p.id === id)?.data.title;
 
 const years = (start: string, end: string) => (start === end ? start : `${start} – ${end}`);
 const external = { target: '_blank', rel: 'noopener noreferrer' };
+// Links into iamsushant.dev itself (like /photos/) stay in the same tab, as root-relative paths, so the
+// browser treats them as same-site navigations and runs the page transition.
+const local = (href: string) => (href.startsWith(profile.url) ? href.slice(profile.url.length) || '/' : null);
 
 let n = 0;
 const next = () => String(++n).padStart(2, '0');
@@ -22,9 +26,10 @@ const rowGrid =
 
 <Base>
   <div aria-hidden="true" class="progress fixed inset-x-0 top-0 z-20 h-0.5 bg-accent print:hidden"></div>
+  <TopBar active="about" />
   <div class="mx-auto max-w-[70rem] px-[clamp(1.25rem,5vw,3.5rem)]">
     <header
-      class="flex flex-col justify-end pt-24 pb-[clamp(3rem,8vw,5.5rem)] sm:min-h-[min(94svh,58rem)] sm:pt-28 print:min-h-0 print:p-0 print:pb-5"
+      class="flex flex-col justify-end pt-12 pb-[clamp(3rem,8vw,5.5rem)] sm:min-h-[min(calc(94svh-4.5rem),54rem)] sm:pt-16 print:min-h-0 print:p-0 print:pb-5"
     >
       <p class="flex items-start gap-2.5 font-mono text-[0.8rem] text-ink-2 motion-safe:animate-rise">
         <span class="mt-[0.5em] size-[0.45rem] shrink-0 rounded-full bg-accent" aria-hidden="true"></span>
@@ -154,12 +159,12 @@ const rowGrid =
               <li class="group relative isolate grid grid-cols-[minmax(0,1fr)_auto] items-baseline gap-x-8 gap-y-2.5 border-b border-rule py-8 first:pt-1 before:absolute before:inset-y-0 before:-inset-x-5 before:-z-10 before:rounded-2xl before:bg-accent/6 before:opacity-0 before:transition-opacity before:duration-300 hover:before:opacity-100 print:py-2.5">
                 <h3 class="font-serif text-project print:text-[14pt]">
                   <a
-                    href={project.href}
-                    {...external}
+                    href={local(project.href) ?? project.href}
+                    {...(local(project.href) ? {} : external)}
                     class="transition-colors group-hover:text-accent after:absolute after:inset-0 after:content-['']"
                   >
                     {project.name}
-                    <span class="sr-only"> (opens in a new tab)</span>
+                    {!local(project.href) && <span class="sr-only"> (opens in a new tab)</span>}
                   </a>
                 </h3>
                 <span class={mono}>{project.year}</span>
@@ -243,15 +248,21 @@ const rowGrid =
         <ul class="grid gap-10 sm:grid-cols-2 sm:gap-8 lg:grid-cols-3" role="list">
           {
             interests.map((interest) => {
-              const isExternal = interest.link?.href.startsWith('http');
+              const href = interest.link && (local(interest.link.href) ?? interest.link.href);
+              const isExternal = href?.startsWith('http');
               return (
                 <li class="border-t border-rule pt-5">
-                  <h3 class="font-serif text-[1.75rem] leading-tight">{interest.title}</h3>
+                  <h3
+                    class="w-fit font-serif text-[1.75rem] leading-tight"
+                    style={href === '/photos/' ? 'view-transition-name: photos-heading' : undefined}
+                  >
+                    {interest.title}
+                  </h3>
                   <p class="mt-2 max-w-[30rem] text-pretty text-ink-2">{interest.body}</p>
                   {interest.link && (
                     <a
                       class="group link mt-4 inline-block font-mono text-[0.8rem] text-ink-2 print:hidden"
-                      href={interest.link.href}
+                      href={href}
                       {...(isExternal ? external : {})}
                     >
                       {interest.link.label} <Arrow internal={!isExternal} />
