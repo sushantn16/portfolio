@@ -14,6 +14,9 @@ export function readingTime(body = ''): string {
   return `${Math.max(1, Math.round(words / 220))} min read`;
 }
 
+/** When a post last changed, for the sitemap and dateModified. */
+export const lastModified = (post: Post): Date => post.data.updated ?? post.data.date;
+
 /** Shared by the list and the article so the title can morph between them. */
 export const transitionName = (post: Post) => `post-${post.id}`;
 

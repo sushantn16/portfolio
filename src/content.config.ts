@@ -8,6 +8,8 @@ const writing = defineCollection({
     title: z.string(),
     description: z.string(),
     date: z.coerce.date(),
+    /** Last real change, if later than `date` (e.g. published long after the work). Feeds the sitemap and dateModified. */
+    updated: z.coerce.date().optional(),
     /** Where the post first appeared, if it was cross-posted. */
     linkedin: z.url().optional(),
     /** Drafts render in `astro dev` but are left out of the build. */
