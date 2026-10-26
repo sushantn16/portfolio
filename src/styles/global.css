@@ -268,6 +268,44 @@
     line-height: 1.65;
   }
 
+  .prose table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .prose th,
+  .prose td {
+    padding: 0.55em 0.75em;
+    border-bottom: 1px solid var(--color-rule);
+    text-align: left;
+  }
+
+  .prose th:first-child,
+  .prose td:first-child {
+    padding-left: 0;
+  }
+
+  .prose th:last-child,
+  .prose td:last-child {
+    padding-right: 0;
+  }
+
+  .prose th {
+    border-bottom-color: var(--color-ink-3);
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: var(--color-ink-3);
+  }
+
+  .prose td {
+    color: var(--color-ink);
+  }
+
   .prose hr {
     margin-block: 2.5em;
     border: 0;
