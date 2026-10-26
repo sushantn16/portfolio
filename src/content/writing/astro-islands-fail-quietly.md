@@ -2,6 +2,7 @@
 title: Four Astro bugs that failed without an error
 description: A click that did nothing, a dev server that served the wrong app, a React error on every visit and a footer that moved. None of them threw.
 date: 2026-09-24
+updated: 2026-10-26
 draft: false
 ---
 
