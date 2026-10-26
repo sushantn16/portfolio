@@ -71,7 +71,7 @@ The fix is one class change: `min-h-full flex-none` instead of `flex-1`. The con
 A month after it shipped, the real-user numbers for the four pages had all moved from poor to good:
 
 | Page | CLS before | CLS a month later |
-|---|---|---|
+|---|---:|---:|
 | Statistics | 0.718 | 0.012 |
 | Upgrade to PRO | 0.692 | 0.003 |
 | Bookings | 0.588 | 0.031 |
