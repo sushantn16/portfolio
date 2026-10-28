@@ -2,6 +2,7 @@
 title: "With AI, the work got faster. The handoffs didn't."
 description: Why AI's productivity gains are easy to feel alone and hard to see in a team, and what I'd change about how we split the work.
 date: 2026-10-28
+linkedin: https://www.linkedin.com/posts/sushantnandwani_with-ai-the-work-got-faster-the-handoffs-share-7521300805040132096-zcqc/
 draft: false
 ---
 
