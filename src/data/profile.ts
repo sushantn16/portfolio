@@ -14,7 +14,7 @@ export const profile = {
   seoDescription:
     'Sushant Nandwani, senior software engineer at Kleinanzeigen in Berlin. Builds AI-powered products end to end: Java and Spring Boot, LLMs, TypeScript and React.',
   description:
-    'Senior software engineer in Berlin. I build AI-powered products end to end: Java and Spring Boot services, the LLM layer, and TypeScript and React interfaces.',
+    'Senior software engineer in Berlin. I build AI-powered products end to end: the systems underneath, the LLM layer, and the interface people actually touch.',
 };
 
 /** Where I've lived and worked, from the CV. */
